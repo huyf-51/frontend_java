@@ -1,23 +1,21 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { FunctionAddUser } from '../../../State/Admin/Action';
-import numeral from 'numeral';
-
+import { API_BASE_URL } from '../../../config/apiconfig';
+import usePrivateApi from '../../../hooks/usePrivateApi';
 const AddStudent = () => {
+    const api = usePrivateApi();
     const [firstName, firstNamechange] = useState('');
     const [lastName, lastNamechange] = useState('');
     const [email, emailchange] = useState('');
     const [password, passwordchange] = useState('');
     const [monthSalary, monthSalarychange] = useState('');
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const handlesubmit = (e) => {
         e.preventDefault();
         const userobj = { firstName, lastName, email, password, monthSalary };
-        dispatch(FunctionAddUser(userobj));
-        navigate('/admin');
+        api.post(`/auth/signup/employee`, userobj).then((res) => {
+            navigate('/admin');
+        });
     };
 
     return (
@@ -112,7 +110,7 @@ const AddStudent = () => {
 
                     <div className="mt-6">
                         <button
-                            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                            className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
                             type="submit"
                         >
                             Submit

@@ -1,13 +1,11 @@
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import { login } from '../../State/Auth/Action';
+import { noneJWT } from '../../config/apiconfig';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
-
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
@@ -15,8 +13,14 @@ const LoginForm = () => {
             email: data.get('email'),
             password: data.get('password'),
         };
-
-        dispatch(login(userData));
+        try {
+            const response = await noneJWT.post(`/auth/signin`, userData);
+            const user = response.data;
+            if (user.accessToken) {
+                localStorage.setItem('accessToken', user.accessToken);
+            }
+            navigate('/');
+        } catch (error) {}
     };
     return (
         <div>

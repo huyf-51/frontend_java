@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import { navigation } from './navigationData';
 import { useNavigate } from 'react-router-dom';
@@ -61,10 +60,7 @@ export default function Navigation() {
         <div className="bg-white pb-10 z-50">
             <header className="fixed top-0 w-full z-50 bg-white">
                 <nav aria-label="Top" className="mx-auto">
-                    <div
-                        className="flex h-16 items-center px-11"
-                        style={{ backgroundColor: '#303434' }}
-                    >
+                    <div className="flex h-16 items-center px-11 bg-green-600">
                         {/* Logo */}
                         <div className="ml-4 flex lg:ml-0">
                             <button onClick={() => navigate('/')}>
@@ -91,8 +87,8 @@ export default function Navigation() {
                                                     <Popover.Button
                                                         className={classNames(
                                                             open
-                                                                ? 'text-white hover:bg-black'
-                                                                : 'border-transparent text-white hover:bg-black',
+                                                                ? ''
+                                                                : 'border-transparent',
                                                             'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
                                                         )}
                                                     >
@@ -151,7 +147,7 @@ export default function Navigation() {
                                     <a
                                         key={page.name}
                                         href={page.href}
-                                        className="flex items-center text-sm font-medium text-white hover:bg-blue-400"
+                                        className="flex items-center text-sm font-medium  hover:bg-blue-400"
                                     >
                                         {page.name}
                                     </a>
@@ -165,7 +161,7 @@ export default function Navigation() {
                                 'ROLE_EMPLOYEE' ? (
                                     <div>
                                         <Avatar
-                                            className="text-white"
+                                            className=""
                                             onClick={handleUserClick}
                                             aria-controls={
                                                 open ? 'basic-menu' : undefined
@@ -222,7 +218,7 @@ export default function Navigation() {
                                   'ROLE_ADMIN' ? (
                                     <div className="flex items-center">
                                         <Avatar
-                                            className="text-white"
+                                            className=""
                                             onClick={handleUserClick}
                                             aria-controls={
                                                 open ? 'basic-menu' : undefined
@@ -271,7 +267,7 @@ export default function Navigation() {
                                 ) : (
                                     <Button
                                         onClick={handleOpen}
-                                        className="text-sm font-medium text-white hover:text-red-600"
+                                        className="text-sm font-medium  hover:text-red-600"
                                         style={{ color: 'white' }}
                                     >
                                         Signin

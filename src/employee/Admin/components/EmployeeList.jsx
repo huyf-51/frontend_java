@@ -2,21 +2,17 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import { api } from '../../../config/apiconfig';
-import {
-    CreateSalaryAll,
-    FetchUserList,
-    Removeuser,
-} from '../../../State/Admin/Action';
 import 'react-toastify/dist/ReactToastify.css';
 import AttendanceModal from './AttendanceModal';
-import { getUser } from '../../../State/Auth/Action';
 import { Pagination, TextField } from '@mui/material';
 import FileUpload from './FileUpload';
 import SalaryModal from './SalaryModal';
+import usePrivateApi from '../../../hooks/usePrivateApi';
+import { getUserList } from '../../../State/Admin/Action';
 
 const EmployeeList = () => {
     console.log('render');
+    const api = usePrivateApi();
     const jwt = localStorage.getItem('accessToken');
     const { auth } = useSelector((store) => store);
     const dispatch = useDispatch();
@@ -39,21 +35,25 @@ const EmployeeList = () => {
         var lowerCase = e.target.value.toLowerCase();
         setInputText(lowerCase);
     };
-    useEffect(() => {
-        if (jwt) {
-            dispatch(getUser(jwt));
-        }
-    }, [jwt, auth.jwt, dispatch]);
     const [currentPage, setCurrentPage] = useState(pageNumber);
     useEffect(() => {
         setCurrentPage(pageNumber);
     }, [pageNumber]);
+
+    const data = {
+        pageNumber: pageNumber - 1,
+        pageSize: 10,
+    };
+
     useEffect(() => {
-        const data = {
-            pageNumber: pageNumber - 1,
-            pageSize: 10,
-        };
-        dispatch(FetchUserList(data));
+        api.get(
+            `/employee/getAll?pageNumber=${data.pageNumber}&pageSize=${data.pageSize}`
+        )
+            .then((res) => {
+                const userlist = res.data;
+                dispatch(getUserList(userlist));
+            })
+            .catch((err) => {});
         // props.loaduser(data);
     }, [pageNumber, dispatch]);
 
@@ -61,17 +61,29 @@ const EmployeeList = () => {
         if (window.confirm('Do you want to remove this user?')) {
             try {
                 const res = await api.delete(`/employee/delete/` + code);
-                toast.success('User removed successfully.');
+                // console.log('res.data>>>', res.data);
+                // dispatch(FetchUserList(data, api)).then(() => {
+                //     toast.success('User removed successfully.');
+                // });
+                api.get(
+                    `/employee/getAll?pageNumber=${data.pageNumber}&pageSize=${data.pageSize}`
+                ).then((res) => {
+                    const userlist = res.data;
+                    dispatch(getUserList(userlist));
+                    toast.success('User removed successfully.');
+                });
             } catch (err) {
                 // dispatch(failRequest(err.message));
             }
         }
     };
-    const handleCreateSalaryForAll = () => {
+    const handleCreateSalaryForAll = async () => {
         if (window.confirm('Do you want to create salary?')) {
-            dispatch(CreateSalaryAll());
+            try {
+                await api.get(`/employee/create/salary/all`);
+                toast.success('Created successfully.');
+            } catch (err) {}
             //props.loaduser();
-            toast.success('Created successfully.');
         }
     };
     const [openModals, setOpenModals] = useState({});
@@ -109,7 +121,7 @@ const EmployeeList = () => {
     if (auth.user?.roles[0].name !== 'ROLE_ADMIN') {
         return (
             <div className="flex justify-center items-center">
-                <h2 className="text-white text-lg">
+                <h2 className="text-lg">
                     You do not have permission to view this page. Please sign in
                     first.
                 </h2>
@@ -133,7 +145,7 @@ const EmployeeList = () => {
     if (user.errmessage) {
         return (
             <div>
-                <h2 className="text-white">{user.errmessage}</h2>
+                <h2 className="">{user.errmessage}</h2>
             </div>
         );
     }
@@ -160,7 +172,7 @@ const EmployeeList = () => {
                     <div className="card-header flex space-x-4">
                         <Link
                             to={'/add'}
-                            className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
+                            className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 font-semibold px-6 py-3 rounded-md"
                         >
                             Add Employee
                         </Link>
@@ -169,7 +181,7 @@ const EmployeeList = () => {
                             onClick={() => {
                                 handleCreateSalaryForAll(1);
                             }}
-                            className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
+                            className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 font-semibold px-6 py-3 rounded-md"
                         >
                             Create Month Salary for all
                         </button>
@@ -179,7 +191,7 @@ const EmployeeList = () => {
                     <div className="relative overflow-x-auto mt-5 bg">
                         <table className="w-full">
                             <thead className="text-xs border-white">
-                                <tr className="bg-black text-white border-white">
+                                <tr className="border-white">
                                     <th
                                         scope="col"
                                         className="border-r px-6 py-4 border-white text-center"
@@ -227,10 +239,7 @@ const EmployeeList = () => {
                             <tbody>
                                 {user.userlist?.content &&
                                     filteredUserList.map((item) => (
-                                        <tr
-                                            key={item.id}
-                                            className="bg-black text-white"
-                                        >
+                                        <tr key={item.id} className="">
                                             <td className="border-r px-6 py-4 border-white text-center ">
                                                 {item.id}
                                             </td>
@@ -257,7 +266,7 @@ const EmployeeList = () => {
                                                             item.attendances
                                                         )
                                                     }
-                                                    className="px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                                                    className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                                                 >
                                                     View
                                                 </button>
@@ -268,7 +277,7 @@ const EmployeeList = () => {
                                                         '/employee/salary/update/' +
                                                         item.id
                                                     }
-                                                    className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
+                                                    className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
                                                 >
                                                     Update Salary
                                                 </Link>
@@ -279,7 +288,7 @@ const EmployeeList = () => {
                                                             item.salaries
                                                         )
                                                     }
-                                                    className="px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                                                    className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                                                 >
                                                     View Salary
                                                 </button>
@@ -289,7 +298,7 @@ const EmployeeList = () => {
                                                     onClick={() => {
                                                         handledelete(item.id);
                                                     }}
-                                                    className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+                                                    className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
                                                 >
                                                     Delete
                                                 </button>

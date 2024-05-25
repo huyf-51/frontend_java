@@ -5,8 +5,9 @@ import {
     GET_USER_LIST,
     MAKE_REQUEST,
     UPDATE_USER,
+    SET_USER_LIST,
 } from './ActionType';
-import { API_BASE_URL, api } from '../../config/apiconfig';
+import { API_BASE_URL } from '../../config/apiconfig';
 
 export const makeRequest = () => {
     return {
@@ -41,7 +42,14 @@ export const updateUser = () => {
     };
 };
 
-export const FetchUserList = (reqdata) => {
+export const setUserList = (data) => {
+    return {
+        type: SET_USER_LIST,
+        payload: data,
+    };
+};
+
+export const FetchUserList = (reqdata, api) => {
     const { pageNumber, pageSize } = reqdata;
     return (dispatch) => {
         dispatch(makeRequest());
@@ -51,20 +59,19 @@ export const FetchUserList = (reqdata) => {
         )
             .then((res) => {
                 const userlist = res.data;
+                console.log('res.data from fetch>>>', res.data);
                 dispatch(getUserList(userlist));
             })
-            .catch((err) => {
-                dispatch(failRequest(err.message));
-            });
+            .catch(async (err) => {});
         // }, 200);
     };
 };
 
-export const Removeuser = (code) => {
+export const Removeuser = (code, api) => {
     return async (dispatch) => {
         // dispatch(makeRequest());
         try {
-            const res = await api.delete(`/employee/delete/` + code);
+            await api.delete(`/employee/delete/` + code);
             // dispatch(deleteUser());
         } catch (err) {
             // dispatch(failRequest(err.message));
@@ -72,7 +79,7 @@ export const Removeuser = (code) => {
     };
 };
 
-export const FunctionAddUser = (data) => {
+export const FunctionAddUser = (data, api) => {
     return (dispatch) => {
         dispatch(makeRequest());
         //setTimeout(() => {
@@ -86,7 +93,7 @@ export const FunctionAddUser = (data) => {
         // }, 2000);
     };
 };
-export const FunctionUpdateEmployee = (salary, id) => {
+export const FunctionUpdateEmployee = (salary, id, api) => {
     return (dispatch) => {
         dispatch(makeRequest());
         //setTimeout(() => {
@@ -106,7 +113,7 @@ export const FunctionUpdateEmployee = (salary, id) => {
         // }, 2000);
     };
 };
-export const CreateSalaryAll = () => {
+export const CreateSalaryAll = (api) => {
     return (dispatch) => {
         dispatch(makeRequest());
         // setTimeout(() => {

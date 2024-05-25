@@ -1,40 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import 'react-alice-carousel/lib/alice-carousel.css';
-
 import StudentInfo from './EmployeeInfo';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../../State/Auth/Action';
-import AttendanceModal from '../../Admin/components/AttendanceModal';
 import AttendanceForm from '../../Admin/components/AttendanceForm';
-import { Link } from 'react-router-dom';
-import { api } from '../../../config/apiconfig';
+import usePrivateApi from '../../../hooks/usePrivateApi';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getUserSuccess } from '../../../State/Auth/Action';
 
 const EmployeeTable = () => {
-    const jwt = localStorage.getItem('accessToken');
-    const { auth } = useSelector((store) => store);
     const dispatch = useDispatch();
-    useEffect(() => {
-        if (jwt) {
-            dispatch(getUser(jwt));
-        }
-    }, [jwt, auth.jwt, dispatch]);
+    const api = usePrivateApi();
+    const { auth } = useSelector((store) => store);
 
     const items = auth.user?.attendances || [];
     const attendances = Array.from(items);
     const handleAttend = () => {
         // Gửi POST request đến /add
         api.post('/employee/attend')
-            .then((response) => {
-                // Xử lý phản hồi thành công
+            .then(async (response) => {
+                const res = await api.get(`/api/users/profile`, {});
+                const user = res.data;
+
+                dispatch(getUserSuccess(user));
+                toast.success('Attend success');
             })
             .catch((error) => {
-                // Xử lý lỗi
-                console.error(error);
+                toast.warning('You are attended today');
             });
     };
     return (
         <div>
-            <div className="space-y-10 py-20 flex flex-col justify-center px-5 lg:px-10 bg-black">
+            <div className="space-y-10 py-20 flex flex-col justify-center px-5 lg:px-10">
                 <thead class="flex justify-center">
                     <tr>
                         <th
@@ -59,12 +56,13 @@ const EmployeeTable = () => {
                     </div>
                     <button
                         onClick={handleAttend}
-                        className="px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                        className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                     >
                         Attend
                     </button>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

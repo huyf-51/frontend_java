@@ -5,6 +5,7 @@ import {
     GET_USER_LIST,
     MAKE_REQUEST,
     UPDATE_USER,
+    SET_USER_LIST,
 } from './ActionType';
 
 const initialstate = {
@@ -48,6 +49,12 @@ export const studentReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 loading: false,
+            };
+        case SET_USER_LIST:
+            console.log('action.payload>>>', action.payload);
+            return {
+                ...state,
+                userlist: action.payload,
             };
         default:
             return state;

@@ -38,12 +38,12 @@ const FileUpload = () => {
             <p className="text-red-600">Add student using JSON file</p>
             <div className="flex">
                 <input
-                    className="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded"
+                    className="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 rounded"
                     type="file"
                     onChange={handleFileChange}
                 />
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-5"
+                    className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded ml-5"
                     onClick={handleUpload}
                 >
                     Add

@@ -5,6 +5,7 @@ import {
     UPDATE_PAYMENT_FAILURE,
     UPDATE_PAYMENT_REQUEST,
 } from './ActionType';
+import { getUser } from '../Auth/Action';
 
 export const createPayment = (lunchId) => async (dispatch) => {
     dispatch({ type: CREATE_PAYMENT_REQUEST });
@@ -25,6 +26,7 @@ export const updatePayment = (reqData) => async (dispatch) => {
         const { data } = await api.get(
             `/api/payments?payment_id=${reqData.paymentId}&lunch_id=${reqData.lunchId}`
         );
+        dispatch(getUser(localStorage.getItem('accessToken')));
     } catch (error) {
         dispatch({ type: UPDATE_PAYMENT_FAILURE, payload: error.message });
     }

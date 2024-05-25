@@ -35,10 +35,7 @@ const LunchItem = ({ lunch }) => {
                         onClick={toggleBox}
                         style={{ cursor: 'pointer' }}
                     >
-                        <th
-                            scope="row"
-                            className="px-6 py-4 whitespace-nowrap bg-black"
-                        >
+                        <th scope="row" className="px-6 py-4 whitespace-nowrap">
                             <KeyboardArrowRightIcon className="text-red-600" />
                             <span className="p-4 text-center font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">
                                 Tháng {lunch.month} - Năm {lunch.year}
@@ -105,7 +102,7 @@ const LunchItem = ({ lunch }) => {
                                                 >
                                                     <button
                                                         type="button"
-                                                        className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
+                                                        className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 font-semibold px-6 py-3 rounded-md"
                                                         onClick={handleCheckout}
                                                     >
                                                         Thanh toán

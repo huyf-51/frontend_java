@@ -4,7 +4,7 @@ import EmailRegister from './EmailRegister';
 
 const Footer = () => {
     return (
-        <footer className="mt-40 flex flex-col items-center bg-black text-center text-white">
+        <footer className="mt-40 flex flex-col items-center text-center">
             <div className="text-lg font-bold">
                 Student project developed using Spring Boot and React.js.
             </div>
@@ -32,11 +32,11 @@ const Footer = () => {
                 <EmailRegister />
             </div>
             <div className="mb-6 flex justify-center items-center">
-                <div className="text-white">Source code:</div>
+                <div className="">Source code:</div>
                 <a
                     href="https://github.com/Namtayto/spring-boot-react-student-app"
                     type="button"
-                    className="ml-4 m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+                    className="ml-4 m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal transition duration-150 ease-in-out hover:bg-opacity-5 focus:outline-none focus:ring-0"
                     data-te-ripple-init
                     data-te-ripple-color="light"
                 >

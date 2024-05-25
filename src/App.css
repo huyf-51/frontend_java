@@ -14,7 +14,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,10 +36,6 @@
   }
 }
 
-body {
-  background-color: black;
-}
-
 /* Gradient Scroll Bar */
 
 /* width */
@@ -51,7 +46,6 @@ body {
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 100vh;
-  background: #1f2937;
 }
 
 /* Handle */

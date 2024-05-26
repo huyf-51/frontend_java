@@ -60,13 +60,12 @@ export default function Navigation() {
         <div className="bg-white pb-10 z-50">
             <header className="fixed top-0 w-full z-50 bg-white">
                 <nav aria-label="Top" className="mx-auto">
-                    <div className="flex h-16 items-center px-11 bg-green-600">
+                    <div className="flex h-16 items-center px-11 bg-sky-700">
                         {/* Logo */}
                         <div className="ml-4 flex lg:ml-0">
                             <button onClick={() => navigate('/')}>
                                 <img
-                                    imgLogo
-                                    src="https://neetcode.io/assets/neetcode-io-logo.png"
+                                    src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
                                     alt=""
                                     width="36px"
                                 ></img>
@@ -191,10 +190,9 @@ export default function Navigation() {
                                                 'aria-labelledby':
                                                     'basic-button',
                                             }}
+                                            disableScrollLock={true}
+                                            autoFocus={false}
                                         >
-                                            <div className="text-center text-red-600">
-                                                Employee: {auth.user?.lastName}
-                                            </div>
                                             <MenuItem
                                                 onClick={() =>
                                                     navigate('/account/profile')
@@ -207,7 +205,7 @@ export default function Navigation() {
                                                     navigate('/account/lunch')
                                                 }
                                             >
-                                                Lunch
+                                                Register Lunch
                                             </MenuItem>
                                             <MenuItem onClick={handleLogout}>
                                                 Logout
@@ -248,16 +246,15 @@ export default function Navigation() {
                                                 'aria-labelledby':
                                                     'basic-button',
                                             }}
+                                            disableScrollLock={true}
+                                            autoFocus={false}
                                         >
-                                            <div className="text-center text-red-600">
-                                                Admin
-                                            </div>
                                             <MenuItem
                                                 onClick={() =>
                                                     navigate('/admin')
                                                 }
                                             >
-                                                Profile
+                                                All Employee
                                             </MenuItem>
                                             <MenuItem onClick={handleLogout}>
                                                 Logout

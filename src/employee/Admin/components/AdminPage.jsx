@@ -9,7 +9,7 @@ const TeacherPage = () => {
                     <tr>
                         <th
                             scope="col"
-                            className="px-6 py-3 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+                            className="px-6 py-3 inline-block text-slate-600"
                             style={{ fontSize: '30px' }}
                         >
                             List of Employee

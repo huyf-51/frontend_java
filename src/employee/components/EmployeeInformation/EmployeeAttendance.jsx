@@ -13,7 +13,7 @@ const EmployeeAttendance = ({ year, attendances }) => {
             <table className="w-full text-sm text-left">
                 <tbody>
                     <tr
-                        className="border-b border-red-400"
+                        className="border-b border-black"
                         onClick={() => toggleBox(year)}
                         style={{ cursor: 'pointer' }}
                     >
@@ -23,13 +23,9 @@ const EmployeeAttendance = ({ year, attendances }) => {
                             className="px-6 py-4 whitespace-nowrap"
                         >
                             <KeyboardArrowRightIcon
-                                className={
-                                    isBoxOpen[year]
-                                        ? 'text-red-600 rotate-90'
-                                        : 'text-red-600'
-                                }
+                                className={isBoxOpen[year] ? 'rotate-90' : ''}
                             />
-                            <span className="p-4 text-center font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">
+                            <span className="p-4 text-center font-bold">
                                 Năm {year}
                             </span>
                         </th>

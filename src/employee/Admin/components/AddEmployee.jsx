@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../../../config/apiconfig';
 import usePrivateApi from '../../../hooks/usePrivateApi';
+
 const AddStudent = () => {
     const api = usePrivateApi();
     const [firstName, firstNamechange] = useState('');
@@ -20,7 +20,7 @@ const AddStudent = () => {
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
+            <div className="w-full p-6 m-auto bg-white rounded-md ring-2 ring-indigo-600 lg:max-w-xl">
                 <Link to={'/admin'}>
                     {' '}
                     <button
@@ -45,7 +45,7 @@ const AddStudent = () => {
                     </button>
                 </Link>
 
-                <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
+                <h1 className="text-3xl font-semibold text-center text-indigo-700 uppercase">
                     Create Employee
                 </h1>
                 <form className="mt-6" onSubmit={handlesubmit}>
@@ -110,7 +110,7 @@ const AddStudent = () => {
 
                     <div className="mt-6">
                         <button
-                            className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                            className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-sky-600 text-gray-100 rounded-md hover:bg-sky-700 focus:outline-none focus:bg-indigo-600"
                             type="submit"
                         >
                             Submit

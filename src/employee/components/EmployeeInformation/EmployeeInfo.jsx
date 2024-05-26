@@ -17,24 +17,24 @@ const EmployeeInfo = ({ userInfo }) => {
                             {userInfo?.firstName} {userInfo?.lastName}
                         </strong>
                     </td>
-                    <td className="">Date of birth:</td>
+                    {/* <td className="">Date of birth:</td>
                     <td>
                         <strong>{userInfo?.birth}</strong>
                     </td>
                     <td className="">Sex:</td>
                     <td className="">
                         <strong>{userInfo?.sex}</strong>
-                    </td>
+                    </td> */}
                 </tr>
                 <tr>
-                    <td className="">Student ID:</td>
+                    {/* <td className="">Student ID:</td>
                     <td>
                         <strong className="">{userInfo?.studentId}</strong>
                     </td>
                     <td className="">Class:</td>
                     <td className="">
                         <strong>{userInfo?.class}</strong>
-                    </td>
+                    </td> */}
                     {/* <td className="">Khoa:</td>
           <td className="">
             <strong>{userInfo?.department}</strong>

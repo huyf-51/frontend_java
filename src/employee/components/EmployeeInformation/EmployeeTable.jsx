@@ -26,7 +26,7 @@ const EmployeeTable = () => {
                 toast.success('Attend success');
             })
             .catch((error) => {
-                toast.warning('You are attended today');
+                toast.warning('You attended today');
             });
     };
     return (
@@ -36,7 +36,7 @@ const EmployeeTable = () => {
                     <tr>
                         <th
                             scope="col"
-                            class="px-6 py-3 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+                            class="px-6 py-3 text-slate-900"
                             style={{ fontSize: '30px' }}
                         >
                             Employee Profile
@@ -56,7 +56,7 @@ const EmployeeTable = () => {
                     </div>
                     <button
                         onClick={handleAttend}
-                        className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                        className="px-4 py-2 tracking-wide bg-sky-600 rounded hover:bg-sky-700"
                     >
                         Attend
                     </button>

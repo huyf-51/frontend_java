@@ -17,7 +17,7 @@ const EmployeeSalary = ({ year, salaries }) => {
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left bg-white border-collapse">
                 <tbody>
-                    <tr className="border-b border-red-400">
+                    <tr>
                         <th
                             scope="row"
                             className="px-6 py-4 whitespace-nowrap"
@@ -25,13 +25,9 @@ const EmployeeSalary = ({ year, salaries }) => {
                             style={{ cursor: 'pointer' }}
                         >
                             <KeyboardArrowRightIcon
-                                className={
-                                    isOpen
-                                        ? 'text-red-600 rotate-90'
-                                        : 'text-red-600'
-                                }
+                                className={isOpen ? 'rotate-90' : ''}
                             />
-                            <span className="p-4 text-center font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">
+                            <span className="p-4 text-center font-bold">
                                 Năm {year}
                             </span>
                         </th>

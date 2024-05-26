@@ -4,7 +4,7 @@ import EmailRegister from './EmailRegister';
 
 const Footer = () => {
     return (
-        <footer className="mt-40 flex flex-col items-center text-center">
+        <footer className="mt-40 flex flex-col items-center text-center pt-14">
             <div className="text-lg font-bold">
                 Student project developed using Spring Boot and React.js.
             </div>

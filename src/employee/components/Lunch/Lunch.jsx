@@ -46,7 +46,7 @@ const Lunch = () => {
                     <tr>
                         <th
                             scope="col"
-                            class="px-6 py-3 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+                            class="px-6 py-3 text-slate-900"
                             style={{ fontSize: '30px' }}
                         >
                             LUNCH INFORMATION
@@ -59,13 +59,13 @@ const Lunch = () => {
                 <div class="relative px-5">
                     <button
                         onClick={handleLunch}
-                        className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                        className="px-4 py-2 tracking-wide transition-colors duration-200 transform bg-sky-600 text-bold rounded-md hover:bg-sky-700 focus:outline-none focus:bg-blue-600"
                     >
                         Register lunch of month
                     </button>
                 </div>
                 <div class="relative px-5">
-                    <div class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
+                    <div class="p-1">
                         <div>{items}</div>
                     </div>
                 </div>

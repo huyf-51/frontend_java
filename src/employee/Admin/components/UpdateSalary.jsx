@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FunctionUpdateEmployee } from '../../../State/Admin/Action';
+import usePrivateApi from '../../../hooks/usePrivateApi';
 
 const UpdateSalary = () => {
+    const api = usePrivateApi();
     const { employeeId } = useParams();
     const [monthSalary, setMonthSalary] = useState('');
     const dispatch = useDispatch();
@@ -14,13 +16,13 @@ const UpdateSalary = () => {
         //   monthhSalary: monthhSalary,
         // };
         // console.log(salaryObj);
-        dispatch(FunctionUpdateEmployee(monthSalary, employeeId));
+        dispatch(FunctionUpdateEmployee(monthSalary, employeeId, api));
         navigate('/admin');
     };
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring-2 ring-indigo-600 lg:max-w-xl">
+            <div className="w-full p-6 m-auto bg-white rounded-md ring-2 ring-indigo-600 lg:max-w-xl mt-56">
                 <Link to={'/admin'}>
                     <button className="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
                         <svg
@@ -41,7 +43,7 @@ const UpdateSalary = () => {
                     </button>
                 </Link>
 
-                <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
+                <h1 className="text-3xl font-semibold text-center text-indigo-700 uppercase">
                     Update Salary
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
@@ -62,7 +64,7 @@ const UpdateSalary = () => {
                     {/* ... Submit button ... */}
                     <div className="mt-6">
                         <button
-                            className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                            className="w-full px-4 py-2 tracking-wide transition-colors duration-200 transform text-gray-100 bg-sky-600 rounded-md hover:bg-sky-700 focus:outline-none focus:bg-indigo-600"
                             type="submit"
                         >
                             Submit

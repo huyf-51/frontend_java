@@ -27,17 +27,20 @@ const LunchItem = ({ lunch }) => {
     //   dispatch(updatePayment(data));
     // }, [tuitionId, paymentId, dispatch]);
     return (
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto mx-40 border-2 border-sky-600 bg-white">
             <table className="w-full text-sm text-left">
                 <tbody>
                     <tr
-                        className="border-b border-red-400"
+                        className="border-b"
                         onClick={toggleBox}
                         style={{ cursor: 'pointer' }}
                     >
-                        <th scope="row" className="px-6 py-4 whitespace-nowrap">
-                            <KeyboardArrowRightIcon className="text-red-600" />
-                            <span className="p-4 text-center font-bold from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">
+                        <th scope="row" className="ps-6 py-4 whitespace-nowrap">
+                            <KeyboardArrowRightIcon />
+                            <span
+                                className="p-4 text-center font-bold"
+                                style={{ marginRight: '-80px' }}
+                            >
                                 Tháng {lunch.month} - Năm {lunch.year}
                             </span>
                         </th>
@@ -45,7 +48,7 @@ const LunchItem = ({ lunch }) => {
                         {isBoxOpen && (
                             <div className="relative overflow-x-auto">
                                 <table className="w-full">
-                                    <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <thead className="text-xs">
                                         <tr>
                                             <th
                                                 scope="col"
@@ -73,7 +76,8 @@ const LunchItem = ({ lunch }) => {
                                                 scope="col"
                                                 className="border-r px-6 py-4 dark:border-neutral-500 text-center"
                                             >
-                                                {lunch.paymentStatus}
+                                                {lunch.paymentStatus ||
+                                                    'chưa thanh toán'}
                                             </th>
                                         </tr>
                                         <tr>
@@ -102,7 +106,7 @@ const LunchItem = ({ lunch }) => {
                                                 >
                                                     <button
                                                         type="button"
-                                                        className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 font-semibold px-6 py-3 rounded-md"
+                                                        className="border-2 border-sky-600 hover:bg-sky-700 font-semibold px-6 py-3 rounded-md"
                                                         onClick={handleCheckout}
                                                     >
                                                         Thanh toán

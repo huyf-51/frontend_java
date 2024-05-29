@@ -40,7 +40,7 @@ const Lunch = () => {
     };
     const items = auth.user?.lunches.map((item) => <LunchItem lunch={item} />);
     return (
-        <div>
+        <div className="mb-96">
             <div className="space-y-10 py-20 flex flex-col justify-center px-5 lg:px-10">
                 <thead class="flex justify-center">
                     <tr>

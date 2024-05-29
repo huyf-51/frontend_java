@@ -13,6 +13,7 @@ import UpdateSalary from '../employee/Admin/components/UpdateSalary';
 import Lunch from '../employee/components/Lunch/Lunch';
 import ViewAttendance from '../employee/components/Attendance/viewAttendance';
 import ViewSalary from '../employee/components/Salary/ViewSalary';
+import CreateNotice from '../employee/components/Notice/CreateNotice';
 
 const employeeRouters = () => {
     return (
@@ -45,6 +46,10 @@ const employeeRouters = () => {
                     <Route
                         path="/employee/salary"
                         element={<ViewSalary />}
+                    ></Route>
+                    <Route
+                        path="/create-notice"
+                        element={<CreateNotice />}
                     ></Route>
                 </Routes>
                 <Footer />

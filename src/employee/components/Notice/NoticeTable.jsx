@@ -20,7 +20,7 @@ const NoticeTable = ({ data }) => {
             <tr>
                 <th
                     scope="col"
-                    class="px-6 py-3 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+                    className="px-6 py-3 ps-10"
                     style={{ fontSize: '20px' }}
                 >
                     THÔNG BÁO CHUNG
@@ -28,7 +28,7 @@ const NoticeTable = ({ data }) => {
             </tr>
             {/* <div class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1"> */}
 
-            <div class="bg-gradient-to-r from-pink-500 to-black p-1">
+            <div class="p-1 border-2 border-black bg-white mx-6">
                 <div>{items}</div>
             </div>
             {/* <div className="relative px-5 border-2 border-rose-500">{items}</div> */}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useDispatch } from 'react-redux';
 import { createPayment } from '../../../State/Payment/Action';
+import timeChange from '../../../utils/time';
 
 const LunchItem = ({ lunch }) => {
     const [isBoxOpen, setIsBoxOpen] = useState(false);
@@ -91,7 +92,7 @@ const LunchItem = ({ lunch }) => {
                                                 scope="col"
                                                 className="border-r px-6 py-4 dark:border-neutral-500 text-center"
                                             >
-                                                {lunch.payAt}
+                                                {timeChange(lunch.payAt)}
                                             </th>
                                         </tr>
 

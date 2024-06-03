@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import AuthModal from '../../Auth/AuthModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, logOut } from '../../../State/Auth/Action';
 
 export default function Navigation() {
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -83,7 +84,11 @@ export default function Navigation() {
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    onClick={() => navigate('/create-notice')}
+                                    onClick={() =>
+                                        navigate('/create-notice', {
+                                            state: location.pathname,
+                                        })
+                                    }
                                 >
                                     Create Notice
                                 </Button>

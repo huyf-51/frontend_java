@@ -42,7 +42,7 @@ const ViewSalary = () => {
         <EmployeeSalary key={year} year={year} salaries={extractedData[year]} />
     ));
     return (
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto mb-96">
             <div>
                 <div className="space-y-10 py-20 flex flex-col justify-center px-5 lg:px-10">
                     <Link to={'/admin'} className="ms-6">

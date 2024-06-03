@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import usePrivateApi from '../../../hooks/usePrivateApi';
 
 const CreateNotice = () => {
+    const location = useLocation();
     const api = usePrivateApi();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -17,7 +18,7 @@ const CreateNotice = () => {
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md ring-2 ring-indigo-600 lg:max-w-xl">
-                <Link to={'/'}>
+                <Link to={location.state}>
                     {' '}
                     <button
                         type="button"

@@ -124,30 +124,13 @@ const EmployeeList = () => {
     if (user.userlist) {
         return (
             <div className="mt-10">
-                <div className="search px-40">
-                    <TextField
-                        className="bg-white"
-                        id="outlined-basic"
-                        onChange={inputHandler}
-                        variant="outlined"
-                        fullWidth
-                        label="Search by employee name"
-                        InputLabelProps={{ style: { fontWeight: 'bold' } }}
-                        InputProps={{ style: { fontWeight: 'bold' } }}
-                    />
-                </div>
-                <div className="card">
-                    <div
-                        className="grid grid-cols-2"
-                        style={{ marginBottom: '-15px' }}
-                    >
-                        <div
-                            className="card-header flex space-x-36"
-                            style={{ marginTop: '-15px' }}
-                        >
+                {/* <div className="card"> */}
+                <div>
+                    <div className="card-header grid grid-cols-2 mb-10">
+                        <div className="flex space-x-20">
                             <Link
                                 to={'/add'}
-                                className="h-1/4 self-center bg-orange-400 font-semibold hover:bg-amber-500 px-6 py-3 rounded-md"
+                                className="self-center bg-orange-400 font-semibold hover:bg-amber-500 px-6 py-3 rounded-md"
                             >
                                 Add Employee
                             </Link>
@@ -156,15 +139,30 @@ const EmployeeList = () => {
                                 onClick={() => {
                                     handleCreateSalaryForAll(1);
                                 }}
-                                className="h-1/4 self-center bg-yellow-500 font-semibold hover:bg-yellow-400 px-6 py-3 rounded-md"
+                                className="self-center bg-yellow-500 font-semibold hover:bg-yellow-400 px-6 py-3 rounded-md"
                             >
                                 Create Month Salary for all
                             </button>
                         </div>
-                        <div className="flex">
-                            <FileUpload />
+                        <div className="search px-40">
+                            <TextField
+                                className="bg-white"
+                                id="outlined-basic"
+                                onChange={inputHandler}
+                                variant="outlined"
+                                fullWidth
+                                label="Search by employee name"
+                                InputLabelProps={{
+                                    style: { fontWeight: 'bold' },
+                                }}
+                                InputProps={{ style: { fontWeight: 'bold' } }}
+                            />
                         </div>
                     </div>
+                    {/* <div className="flex">
+                            <FileUpload />
+                        </div> */}
+                    {/* </div> */}
 
                     {/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
                     <div className="relative overflow-x-auto mt-5 bg">

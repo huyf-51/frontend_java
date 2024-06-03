@@ -47,7 +47,6 @@ const EmployeeTable = () => {
                     <StudentInfo userInfo={auth.user} />
                 </div>
 
-                {/* <div className="relative px-5 border">{items}</div> */}
                 <div class="relative px-5">
                     <div>
                         <AttendanceForm
@@ -56,7 +55,7 @@ const EmployeeTable = () => {
                     </div>
                     <button
                         onClick={handleAttend}
-                        className="px-4 py-2 tracking-wide bg-sky-600 rounded hover:bg-sky-700"
+                        className="ms-16 px-4 py-2 tracking-wide bg-sky-600 rounded hover:bg-sky-700"
                     >
                         Attend
                     </button>

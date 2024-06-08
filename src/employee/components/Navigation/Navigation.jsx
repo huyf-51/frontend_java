@@ -85,6 +85,14 @@ export default function Navigation() {
                                         anchorEl={employeeAnchorEl}
                                         open={Boolean(employeeAnchorEl)}
                                         onClose={handleEmployeeMenuClose}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'right',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
                                     >
                                         <MenuItem
                                             onClick={() => {
@@ -127,6 +135,14 @@ export default function Navigation() {
                                         anchorEl={adminAnchorEl}
                                         open={Boolean(adminAnchorEl)}
                                         onClose={handleAdminMenuClose}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'right',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
                                     >
                                         <MenuItem
                                             onClick={() => {

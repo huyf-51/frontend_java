@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AuthModal from '../../Auth/AuthModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,20 +10,39 @@ export default function Navigation() {
     const navigate = useNavigate();
 
     const [openAuthModal, setOpenAuthModal] = useState(false);
+    const [employeeAnchorEl, setEmployeeAnchorEl] = useState(null);
+    const [adminAnchorEl, setAdminAnchorEl] = useState(null);
+
     const jwt = localStorage.getItem('accessToken');
     const { auth } = useSelector((store) => store);
     const dispatch = useDispatch();
 
-    const handleOpen = (event) => {
+    const handleOpen = () => {
         setOpenAuthModal(true);
     };
-    const handleClose = (event) => {
+    const handleClose = () => {
         setOpenAuthModal(false);
     };
 
     const handleLogout = () => {
         dispatch(logOut());
         navigate('/');
+    };
+
+    const handleEmployeeMenuOpen = (event) => {
+        setEmployeeAnchorEl(event.currentTarget);
+    };
+
+    const handleEmployeeMenuClose = () => {
+        setEmployeeAnchorEl(null);
+    };
+
+    const handleAdminMenuOpen = (event) => {
+        setAdminAnchorEl(event.currentTarget);
+    };
+
+    const handleAdminMenuClose = () => {
+        setAdminAnchorEl(null);
     };
 
     useEffect(() => {
@@ -53,61 +72,105 @@ export default function Navigation() {
                                 ></img>
                             </button>
                         </div>
-                        {auth.user?.roles[0].name === 'ROLE_EMPLOYEE' ? (
-                            <div className="flex gap-10">
+                        <div className="ml-auto flex gap-10 items-center">
+                            {auth.user?.roles[0].name === 'ROLE_EMPLOYEE' ? (
+                                <>
+                                    <Avatar
+                                        alt={auth.user.name}
+                                        src="/path-to-employee-avatar.jpg" // Replace with the actual path to the employee's avatar image
+                                        onClick={handleEmployeeMenuOpen}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                    <Menu
+                                        anchorEl={employeeAnchorEl}
+                                        open={Boolean(employeeAnchorEl)}
+                                        onClose={handleEmployeeMenuClose}
+                                    >
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate('/account/profile');
+                                                handleEmployeeMenuClose();
+                                            }}
+                                        >
+                                            Profile
+                                        </MenuItem>
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate('/account/lunch');
+                                                handleEmployeeMenuClose();
+                                            }}
+                                        >
+                                            Register Lunch
+                                        </MenuItem>
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate('/employee/leave');
+                                                handleEmployeeMenuClose();
+                                            }}
+                                        >
+                                            Request Leave
+                                        </MenuItem>
+                                        <MenuItem onClick={handleLogout}>
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                </>
+                            ) : auth.user?.roles[0].name === 'ROLE_ADMIN' ? (
+                                <>
+                                    <Avatar
+                                        alt={auth.user.name}
+                                        src="/path-to-admin-avatar.jpg" // Replace with the actual path to the admin's avatar image
+                                        onClick={handleAdminMenuOpen}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                    <Menu
+                                        anchorEl={adminAnchorEl}
+                                        open={Boolean(adminAnchorEl)}
+                                        onClose={handleAdminMenuClose}
+                                    >
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate('/admin');
+                                                handleAdminMenuClose();
+                                            }}
+                                        >
+                                            All Employee
+                                        </MenuItem>
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate('/create-notice', {
+                                                    state: location.pathname,
+                                                });
+                                                handleAdminMenuClose();
+                                            }}
+                                        >
+                                            Create Notice
+                                        </MenuItem>
+                                        <MenuItem
+                                            onClick={() => {
+                                                navigate(
+                                                    '/admin/list-request-leave'
+                                                );
+                                                handleAdminMenuClose();
+                                            }}
+                                        >
+                                            Request Leave
+                                        </MenuItem>
+                                        <MenuItem onClick={handleLogout}>
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                </>
+                            ) : (
                                 <Button
-                                    variant="contained"
-                                    onClick={() => navigate('/account/profile')}
+                                    onClick={handleOpen}
+                                    className="text-sm font-medium hover:text-red-600"
+                                    style={{ color: 'white' }}
                                 >
-                                    Profile
+                                    Signin
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={() => navigate('/account/lunch')}
-                                >
-                                    Register Lunch
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </Button>
-                            </div>
-                        ) : auth.user?.roles[0].name === 'ROLE_ADMIN' ? (
-                            <div className="flex items-center gap-10">
-                                <Button
-                                    variant="contained"
-                                    onClick={() => navigate('/admin')}
-                                >
-                                    All Employee
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={() =>
-                                        navigate('/create-notice', {
-                                            state: location.pathname,
-                                        })
-                                    }
-                                >
-                                    Create Notice
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </Button>
-                            </div>
-                        ) : (
-                            <Button
-                                onClick={handleOpen}
-                                className="text-sm font-medium hover:text-red-600"
-                                style={{ color: 'white' }}
-                            >
-                                Signin
-                            </Button>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </nav>
             </header>

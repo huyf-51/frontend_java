@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Pagination, TextField } from '@mui/material';
-import FileUpload from './FileUpload';
 import usePrivateApi from '../../../hooks/usePrivateApi';
 import { getUserList } from '../../../State/Admin/Action';
 

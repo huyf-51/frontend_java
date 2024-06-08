@@ -7,13 +7,16 @@ const EmailRegister = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5454/email/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ registerEmail }),
-            });
+            const response = await fetch(
+                `${process.env.REACT_APP_API}/email/send`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ registerEmail }),
+                }
+            );
 
             if (response.ok) {
                 const data = await response.text();

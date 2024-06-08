@@ -14,6 +14,8 @@ import Lunch from '../employee/components/Lunch/Lunch';
 import ViewAttendance from '../employee/components/Attendance/viewAttendance';
 import ViewSalary from '../employee/components/Salary/ViewSalary';
 import CreateNotice from '../employee/components/Notice/CreateNotice';
+import Leave from '../employee/components/Leave/Leave';
+import ListRequestLeave from '../employee/Admin/components/ListRequestLeave';
 
 const employeeRouters = () => {
     return (
@@ -50,6 +52,11 @@ const employeeRouters = () => {
                     <Route
                         path="/create-notice"
                         element={<CreateNotice />}
+                    ></Route>
+                    <Route path="/employee/leave" element={<Leave />}></Route>
+                    <Route
+                        path="/admin/list-request-leave"
+                        element={<ListRequestLeave />}
                     ></Route>
                 </Routes>
                 <Footer />
